@@ -1,103 +1,689 @@
-/* Global Styles */
-body {
-  font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
-  background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-  color: #2b2b2b;
+/* ==================== Root Variables ==================== */
+:root {
+  /* Premium, Balanced Vibrant Colorway */
+  --primary-color: #2563eb;
+  --secondary-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+
+  /* Modern Light Mode (Sleek Canvas) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: #cbd5e1;
+  --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  /* Chessboard Colors - Traditional Classic */
+  --board-light: #e8dcc8;
+  --board-dark: #b58863;
+}
+
+/* Modern Dark Mode (Deep Carbon Canvas) */
+body.dark-mode {
+  --bg-primary: #0f172a;
+  --bg-secondary: #020617;
+  --bg-tertiary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+
+  /* Dark mode chessboard */
+  --board-light: #e8dcc8;
+  --board-dark: #b58863;
+}
+
+/* ==================== Global Styles ==================== */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   min-height: 100vh;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* ==================== Header ==================== */
+.header {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;
-  padding: 40px 20px;
 }
 
-/* Smooth animated gradient */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
 }
 
-/* Header Style */
-h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: #1a1a1a;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to right, #1a73e8, #673ab7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: glow 2s ease-in-out infinite alternate;
+.header-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
-/* Text glow animation */
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 10px rgba(103, 58, 183, 0.4), 0 0 20px rgba(26, 115, 232, 0.3);
-  }
-  100% {
-    text-shadow: 0 0 20px rgba(103, 58, 183, 0.6), 0 0 30px rgba(26, 115, 232, 0.4);
-  }
-}
-
-
-
-/* Header Style */
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #2b2b2b;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Chessboard Grid */
-.chessboard {
-  display: grid;
-  grid-template-columns: repeat(8, 80px);
-  grid-template-rows: repeat(8, 80px);
-  width: 640px;
-  height: 640px;
-  margin: 40px auto;
-  border: 5px solid #1f1f1f;
-  border-radius: 15px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  background-color: #333;
-}
-
-
-/* Squares */
-.square {
-  width: 80px;
-  height: 80px;
+/* ==================== Theme Toggle ==================== */
+.theme-toggle {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+}
+
+.theme-toggle:hover {
+  background: var(--border-color);
+  transform: translateY(-1px);
+}
+
+.theme-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* ==================== Main Layout Container ==================== */
+.main-container {
+  max-width: 1400px;
+  margin: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: center;
+}
+
+.info-panel,
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: fit-content;
+}
+
+@media (max-width: 1100px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .info-panel,
+  .control-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    width: 100%;
+  }
+}
+
+/* ==================== Board Container ==================== */
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+/* Chessboard Framework */
+.chessboard {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: min(600px, 85vw);
+  height: min(600px, 85vw);
+  aspect-ratio: 1 / 1;
+  border: 6px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--board-dark);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+/* Squares */
+.square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.8rem, 4vw, 3rem);
   cursor: pointer;
-  transition: transform 0.1s ease, background-color 0.3s ease;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.15s ease;
 }
 
-.capture {
-  background-color: rgba(255, 0, 0, 0.3) !important;
-  box-shadow: inset 0 0 0 3px rgba(255, 0, 0, 0.7),
-              0 0 10px rgba(255, 0, 0, 0.4);
+/* Square Base Themes */
+.square.white {
+  background-color: var(--board-light);
+}
+
+.square.black {
+  background-color: var(--board-dark);
+}
+
+/* Piece Enhancements for Optimal Contrast Overlays */
+.square.white-piece {
+  color: #ffffff !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+}
+
+.square.black-piece {
+  color: #0f172a !important;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.8));
+}
+
+/* ==================== Square Interaction States ==================== */
+.square.selected {
+  background-color: rgba(37, 99, 235, 0.4) !important;
+  box-shadow: inset 0 0 0 3px var(--primary-color);
+  z-index: 2;
+}
+
+.square.highlight::before {
+  content: '';
+  position: absolute;
+  width: 24%;
+  height: 24%;
+  background-color: rgba(16, 185, 129, 0.7);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.square.capture {
+  background-color: rgba(239, 68, 68, 0.3) !important;
+  box-shadow: inset 0 0 0 3px var(--danger-color);
+}
+
+.square.check {
+  background-color: rgba(239, 68, 68, 0.5) !important;
+  animation: check-pulse 1.5s infinite ease-in-out;
+  z-index: 2;
+}
+
+@keyframes check-pulse {
+
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 3px var(--danger-color);
+  }
+
+  50% {
+    box-shadow: inset 0 0 0 5px var(--danger-color), rgba(239, 68, 68, 0.4) 0 0 12px;
+  }
+}
+
+/* ==================== Game Message Overlay Banner ==================== */
+.game-message {
+  width: min(600px, 85vw);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 0.75rem 1.2rem;
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.game-message.checkmate {
+  background-color: var(--danger-color);
+  color: #ffffff;
+  border-color: transparent;
+  animation: pulse-alert 0.5s ease-in-out;
+}
+
+.game-message.check {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.game-message.stalemate {
+  background-color: var(--warning-color);
+  color: white;
+  border-color: transparent;
+}
+
+@keyframes pulse-alert {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ==================== Sidebars & Bento Cards ==================== */
+.panel-section {
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s ease;
+}
+
+.panel-section:hover {
+  border-color: var(--primary-color);
+}
+
+.panel-section h3 {
+  margin: 0 0 0.85rem 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==================== Turn Indicator ==================== */
+.turn-indicator {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0.6rem 0.75rem;
+  background-color: var(--bg-tertiary);
   border-radius: 6px;
-  z-index: 1;
+  border-left: 4px solid var(--primary-color);
 }
 
-.square:hover {
-  transform: scale(1.05);
+/* ==================== Timer Display Widget ==================== */
+.timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-tertiary);
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
 }
 
-/* Square Colors */
-.white {
-  background-color: #f0d9b5;
+.timer-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
+.timer-value {
+  color: var(--primary-color);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.timer-value.warning {
+  color: var(--danger-color);
+  animation: timer-pulse 1s ease-in-out infinite;
+}
+
+@keyframes timer-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ==================== Modern Move History Grid Fix ==================== */
+.move-history {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+  gap: 0.4rem;
+  padding: 0.5rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.move-history .empty-state {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 0.5rem;
+  grid-column: 1 / -1;
+  font-size: 0.85rem;
+}
+
+.move-entry {
+  padding: 0.3rem 0.5rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-family: 'SF Mono', 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.move-entry:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* ==================== Modern Premium Buttons ==================== */
+.btn {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  letter-spacing: -0.1px;
+  box-shadow: var(--shadow);
+}
+
+.btn-small {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  width: auto;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #047857;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ==================== Info Dashboard Grid ==================== */
+.info-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.info-item .label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.info-item .value {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+/* ==================== Rules Layout (Fixed Accessibility Contrast) ==================== /.rules-text {font-size: 0.85rem;color: var(--text-secondary); / Dynamic high-contrast variable map */
+}
+
+.rules-text p {
+  margin: 0.4rem 0;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ==================== Clean App Custom Scrollbars ==================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ==================== Native Feel Smooth Modals ==================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(2, 6, 23, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: var(--bg-primary);
+  border-radius: 16px;
+  padding: 1.75rem;
+  max-width: 440px;
+  width: 90%;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: var(--primary-color);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -0.3px;
+}
+
+.modal-content h3 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+/* ==================== Game Over Modal ==================== */
+.game-over-content {
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 450px;
+}
+
+.game-over-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-over-message {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 1.5rem 0 2rem 0;
+  line-height: 1.6;
+  padding: 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.game-over-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.game-over-actions .btn {
+  flex: 1;
+  padding: 0.85rem 1.25rem;
+}
+
+/* ==================== Mode & Difficulty Selectors ==================== */
+.mode-selector,
+.difficulty-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.difficulty-selector {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mode-btn,
+.difficulty-btn {
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mode-btn:hover,
+.difficulty-btn:hover {
+  border-color: var(--primary-color);
+  background-color: var(--bg-tertiary);
+  transform: translateY(-2px);
+}
+
+.mode-btn span,
+.difficulty-btn span {
+  font-size: 1.5rem;
+}
+
+.difficulty-section,
+.pvp-section {
+  transition: all 0.3s ease;
+}
+
+.difficulty-section.hidden,
+.pvp-section.hidden {
+  display: none;
+}
+
+.close-btn {
+  margin-top: 1rem;
+}
 .black {
   background-color: #b58863;
   color: #fff;

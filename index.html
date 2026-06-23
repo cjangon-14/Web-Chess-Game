@@ -4,17 +4,134 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chess Game</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Chess Game</h1>
-  <div class="container">
-    <p id="turn-indicator">Current Turn: White</p>
-    <p>Time left: <span id="timer">30</span>s</p>
-    <button onclick="undoMove()">Undo</button>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>♔ Chess Game ♔</h1>
+      <div class="header-controls">
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Game Mode Dialog -->
+  <div id="game-mode-dialog" class="modal hidden">
+    <div class="modal-content">
+      <h2>Select Game Mode</h2>
+      
+      <div class="mode-selector">
+        <button class="mode-btn" onclick="startPvPGame()">
+          <span>👥</span> Local PvP
+        </button>
+        <button class="mode-btn" onclick="startBotGame()">
+          <span>🤖</span> Play with Bot
+        </button>
+      </div>
+
+      <button class="btn btn-secondary close-btn" onclick="closeGameModeDialog()">
+        Cancel
+      </button>
+    </div>
   </div>
-  <div class="chessboard" id="chessboard"></div>
+  <!-- Game Over Modal -->
+  <div id="game-over-modal" class="modal hidden">
+    <div class="modal-content game-over-content">
+      <h2 id="game-over-title">Game Over</h2>
+      <div id="game-over-message" class="game-over-message"></div>
+      <div class="game-over-actions">
+        <button class="btn btn-primary" onclick="showGameModeDialog()">
+          <span>🔄</span> New Game
+        </button>
+        <button class="btn btn-secondary" onclick="closeGameOverModal()">
+          <span>✓</span> Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Left Sidebar - Info Panel -->
+    <aside class="info-panel">
+      <div class="panel-section">
+        <h3>Game Status</h3>
+        <div id="turn-indicator" class="turn-indicator">White to Move</div>
+        <div class="timer-display">
+          <span class="timer-label">Time:</span>
+          <span id="timer" class="timer-value">30</span>s
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Move History</h3>
+        <div id="move-history" class="move-history">
+          <p class="empty-state">No moves yet</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center - Board -->
+    <div class="board-container">
+      <div class="chessboard" id="chessboard"></div>
+      <div id="game-message" class="game-message"></div>
+    </div>
+
+    <!-- Right Sidebar - Controls -->
+    <aside class="control-panel">
+      <div class="panel-section">
+        <h3>Controls</h3>
+        <button class="btn btn-primary" onclick="showGameModeDialog()">
+          <span>🔄</span> New Game
+        </button>
+        <button class="btn btn-secondary" onclick="undoMove()">
+          <span>↶</span> Undo
+        </button>
+      </div>
+
+      <div class="panel-section">
+        <h3>Game Info</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Mode:</span>
+            <span id="game-mode" class="value">Local PvP</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Difficulty:</span>
+            <span id="game-difficulty" class="value">-</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Moves:</span>
+            <span id="move-count" class="value">0</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Status:</span>
+            <span id="game-status" class="value">Playing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Rules</h3>
+        <div class="rules-text">
+          <p>• Click or drag pieces to move</p>
+          <p>• Yellow = valid moves</p>
+          <p>• Red = capture</p>
+          <p>• Blue = selected piece</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Bulletproof Chess Validator Scripts -->
+  <script src="moveValidator.js"></script>
+  <script src="validatorIntegration.js"></script>
+  <script src="validatorTests.js"></script>
+  <!-- Main Game Script -->
   <script src="script.js"></script>
 </body>
 
