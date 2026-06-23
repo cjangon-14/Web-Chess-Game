@@ -1,6 +1,6 @@
 # ♔ Web Chess Game
 
-A modern, fully functional browser-based chess game with a sleek interface, complete chess rule implementation, and **AI Bot opponent** with difficulty levels.
+A modern, fully functional browser-based chess game with a sleek interface, complete chess rule implementation, and **AI Bot opponent**.
 
 ## ✨ Features
 
@@ -15,17 +15,14 @@ A modern, fully functional browser-based chess game with a sleek interface, comp
 
 ### Game Modes
 - 🎮 **Local PvP** - Play against another player on the same device
-- 🤖 **Play with Bot** - Challenge the AI opponent with three difficulty levels:
-  - 🟢 **Easy** - Shallow AI (depth 1) for casual play
-  - 🟡 **Medium** - Balanced AI (depth 2) for standard play
-  - 🔴 **Hard** - Deep AI (depth 3) with minimax and alpha-beta pruning
+- 🤖 **Play with Bot** - Challenge the AI opponent:
 
 ### Game Features
 - 🖱️ **Dual input modes** - Click-to-move or drag-and-drop
 - ⏰ **Turn timer** - 30 seconds per move (with visual warning)
 - 📝 **Move history** - Displays all moves in algebraic notation
 - 🔄 **Undo functionality** - Step back moves
-- 🎮 **Game mode selector** - Switch between PvP and Bot with difficulty selection
+- 🎮 **Game mode selector** - Switch between PvP and Bot
 - 🎵 **Sound effects** - Audio feedback for moves, captures, and checks
 
 ### Modern Design
@@ -52,8 +49,7 @@ A modern, fully functional browser-based chess game with a sleek interface, comp
 3. Choose your game mode:
    - **Local PvP**: Play against another human player
    - **Play with Bot**: Face off against the AI
-4. If playing with Bot, select a difficulty level
-5. Click **New Game** to start
+4. Click **New Game** to start
 
 ### Making Moves
 1. Click or drag pieces to move them
@@ -68,25 +64,8 @@ A modern, fully functional browser-based chess game with a sleek interface, comp
 ### Algorithm
 The bot uses **Minimax with Alpha-Beta Pruning** to calculate optimal moves:
 - Evaluates board state by material count and strategic position
-- Searches deeper on higher difficulties
 - Prunes branches to improve performance
 
-### Difficulty Levels
-
-**Easy (Depth 1)**
-- Looks 1 move ahead
-- Makes some tactical mistakes
-- Good for beginners
-
-**Medium (Depth 2)**
-- Looks 2 moves ahead
-- Decent tactical play
-- Balanced challenge
-
-**Hard (Depth 3)**
-- Looks 3 moves ahead
-- Strong tactical and positional play
-- Challenging for intermediate players
 
 ### Move Evaluation
 Scores are based on:
@@ -160,8 +139,6 @@ Or use Live Server in VS Code for development.
 
 ### Performance
 - Alpha-beta pruning reduces tree search by ~80%
-- Easy difficulty completes instantly
-- Medium and Hard may take 1-2 seconds depending on position
 
 ### Limitations
 - No opening book or endgame tables
@@ -183,7 +160,6 @@ Or use Live Server in VS Code for development.
 - PGN file import/export
 - Game replay/analysis
 - Online multiplayer
-- Difficulty adjustment based on player skill
 - Move hints for learning
 
 ## 📄 License
