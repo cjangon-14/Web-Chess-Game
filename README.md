@@ -2,70 +2,71 @@
 
 A modern, fully functional browser-based chess game with a sleek interface, complete chess rule implementation, and **AI Bot opponent**.
 
+## 📋 Project Overview
+
 ## ✨ Features
 
 ### Core Chess Rules
 - ✅ **Legal move validation** with king safety checks
-- ♔ **Castling** (King-side and Queen-side)
+- ♔ **Castling** (King-side and Queen-side with full validation)
 - ♟️ **Pawn promotion** with piece selection
 - ⚔️ **En passant** capture support
 - 👑 **Check and checkmate** detection
 - 🤝 **Stalemate** detection (draw condition)
 - ♞ **Full piece movement** (all pieces follow standard chess rules)
+- 📌 **Absolute pin detection** (pieces pinned to king cannot move off pin line)
 
 ### Game Modes
 - 🎮 **Local PvP** - Play against another player on the same device
-- 🤖 **Play with Bot** - Challenge the AI opponent:
+- 🤖 **Play with Bot** - Challenge the AI opponent with **default medium difficulty**
 
 ### Game Features
 - 🖱️ **Dual input modes** - Click-to-move or drag-and-drop
-- ⏰ **Turn timer** - 30 seconds per move (with visual warning)
-- 📝 **Move history** - Displays all moves in algebraic notation
+- 📝 **Move history** - Horizontal wrap display with all moves
 - 🔄 **Undo functionality** - Step back moves
-- 🎮 **Game mode selector** - Switch between PvP and Bot
+- 🎮 **Instant mode selection** - Switch between PvP and Bot (no difficulty menu)
 - 🎵 **Sound effects** - Audio feedback for moves, captures, and checks
 
 ### Modern Design
 - 🌓 **Dark/Light theme toggle** - Persistent theme preference
 - 📱 **Responsive layout** - Optimized for desktop and tablet
-- 🎨 **Modern UI** - Clean, professional interface with smooth animations
+- 🎨 **Minimalist UI** - Clean, professional interface with crisp borders (no shadows)
 - 🎯 **Move indicators** - Color-coded highlights:
   - 🟨 Yellow = Legal moves
   - 🔴 Red = Capture moves
   - 🔵 Blue = Selected piece
-  - 🔴 Red border = King in check
+  - 🔴 Red pulsing = King in check
+- 🎉 **Elegant game over modal** - Celebratory display for checkmate/stalemate
 
 ### Information Panels
-- **Left panel**: Game status, timer, and move history
-- **Right panel**: Game controls, statistics, game mode info
+- **Left panel**: Game status and move history
+- **Right panel**: Game controls and game info
 - **Center**: Chess board with piece positions
-- **Status display**: Real-time game messages (check, checkmate, stalemate, etc.)
+- **Status display**: Real-time game messages
 
 ## 🎮 How to Play
 
 ### Starting a Game
 1. Open `index.html` in your web browser
-2. Click the ⚙️ **Settings** button in the header
-3. Choose your game mode:
-   - **Local PvP**: Play against another human player
-   - **Play with Bot**: Face off against the AI
-4. Click **New Game** to start
+2. Click **New Game** button
+3. Choose your game mode instantly:
+   - **👥 Local PvP**: Play against another human player
+   - **🤖 Play with Bot**: Face off against the AI (medium difficulty)
+4. Game starts immediately
 
 ### Making Moves
 1. Click or drag pieces to move them
 2. Legal moves will be highlighted in yellow
 3. Capture moves are highlighted in red
-4. If your king is in check, it will have a red border
-5. Complete your move within 30 seconds
-6. Use "Undo" to step back a move
+4. If your king is in check, it will pulse red
+5. Use **Undo** to step back a move anytime
 
 ## 🤖 AI Bot Details
 
 ### Algorithm
-The bot uses **Minimax with Alpha-Beta Pruning** to calculate optimal moves:
+The bot uses **Minimax algorithm** to calculate optimal moves:
 - Evaluates board state by material count and strategic position
-- Prunes branches to improve performance
-
+- Search depth: Medium (default) for balanced gameplay
 
 ### Move Evaluation
 Scores are based on:
@@ -78,8 +79,7 @@ Scores are based on:
 
 - **Checkmate**: King is in check and has no legal moves
 - **Stalemate**: King is NOT in check but has no legal moves (draw)
-- **Time Out**: Player runs out of time on their turn
-- **New Game**: Start fresh at any time
+- **New Game**: Start fresh at any time via the New Game button
 
 ## 📊 Special Moves
 
@@ -90,21 +90,21 @@ Scores are based on:
 ## 🎨 Themes
 
 - **Light Mode** (default): Clean, bright interface
-- **Dark Mode**: Easy on the eyes for evening play
+- **Dark Mode**: Deep carbon canvas for comfortable play
 
 Theme preference is automatically saved to your browser.
 
 ## 📱 Responsive Design
 
-- Desktop: Full three-panel layout
-- Tablet: Stacked layout with optimized spacing
-- Mobile: Simplified interface optimized for touch
+- **Desktop**: Full three-column layout (left status, center board, right controls)
+- **Tablet**: Optimized stacked layout
+- **Mobile**: Single column with focused board view
 
 ## 🛠️ Technologies
 
 - **HTML5** - Semantic structure
 - **CSS3** - Modern styling with CSS variables and animations
-- **JavaScript** - Complete game logic with AI bot using minimax algorithm
+- **JavaScript (Vanilla)** - Complete game logic with AI bot using minimax algorithm
 - **Web Audio API** - Sound effects (optional)
 
 ## 🚀 Getting Started
@@ -138,55 +138,33 @@ Or use Live Server in VS Code for development.
 - Prevents corrupting the actual game state
 
 ### Performance
-- Alpha-beta pruning reduces tree search by ~80%
+- Minimax with strategic evaluation for real-time moves
+- Optimal for medium difficulty gameplay
 
 ### Limitations
 - No opening book or endgame tables
 - Doesn't learn from previous games
-- Limited to depth 3 to maintain reasonable performance
+- AI set to default medium difficulty for balanced play
 
 ## 📝 Notes
 
 - All chess rules are fully implemented
 - Games are not saved (refresh page starts new game)
-- AI may occasionally make suboptimal moves on Hard due to depth limit
 - Multiplayer is local (same device)
+- Instant game mode switching between PvP and Bot
 
 ## 🤝 Future Enhancement Ideas
 
-- Deeper AI search with iterative deepening
+- Adjustable AI difficulty selection
 - Opening book database
-- Endgame tablebase support
-- PGN file import/export
 - Game replay/analysis
-- Online multiplayer
+- Online multiplayer support
 - Move hints for learning
+- Performance stats and move tracking
 
 ## 📄 License
 
 This project is open source and available for educational and personal use.
-
-## ✨ Features
-
-### Core Chess Rules
-- ✅ **Legal move validation** with king safety checks
-- ♔ **Castling** (King-side and Queen-side)
-- ♟️ **Pawn promotion** with piece selection
-- ⚔️ **En passant** capture support
-- 👑 **Check and checkmate** detection
-- 🤝 **Stalemate** detection (draw condition)
-- ♞ **Full piece movement** (all pieces follow standard chess rules)
-
-### Game Features
-- 🖱️ **Dual input modes** - Click-to-move or drag-and-drop
-- ⏰ **Turn timer** - 30 seconds per move (with visual warning)
-- 📝 **Move history** - Displays all moves in algebraic notation
-- 🔄 **Undo functionality** - Step back moves
-- 🎮 **Game reset** - Start a new game anytime
-- 🎵 **Sound effects** - Audio feedback for moves, captures, and checks
-
-### Modern Design
-- 🌓 **Dark/Light theme toggle** - Persistent theme preference
 - 📱 **Responsive layout** - Optimized for desktop and tablet
 - 🎨 **Modern UI** - Clean, professional interface with smooth animations
 - 🎯 **Move indicators** - Color-coded highlights:
